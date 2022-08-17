@@ -43,4 +43,6 @@ RUN find /google-cloud-sdk/ -name "__pycache__" -type d  | xargs -n 1 rm -rf
 # stage #4: final minimal runtime image 
 FROM base
 COPY --from=google-cloud-sdk /google-cloud-sdk /google-cloud-sdk
-CMD gcloud beta emulators pubsub start --project=test
+
+EXPOSE 8085
+ENTRYPOINT ["/google-cloud-sdk/bin/gcloud", "beta", "emulators", "pubsub", "start", "--host-port=0.0.0.0:8085"]
