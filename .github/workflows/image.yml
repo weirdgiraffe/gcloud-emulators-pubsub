@@ -1,8 +1,11 @@
-name: publish to dockerhub
+name: publish newest image to dockerhub
 
 on:
-  push:
-    branches: master
+  - push:
+      branches: master
+  - schedule:
+    # run daily at 2AM
+    - cron:  '0 2 * * *'
 
 jobs:
   buildx:
